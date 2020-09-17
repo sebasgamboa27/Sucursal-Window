@@ -2,12 +2,12 @@
   <h1>Login</h1>
 
   <div class="txtb">
-    <input type="text">
+    <input #userInput type="text" (focus)="focusIn(userInput)" (focusout)="focusOut(userInput)">
     <span data-placeholder="Username"></span>
   </div>
 
   <div class="txtb">
-    <input type="password">
+    <input #passwordInput type="password" (focus)="focusIn(passwordInput)" (focusout)="focusOut(passwordInput)">
     <span data-placeholder="Password"></span>
   </div>
 

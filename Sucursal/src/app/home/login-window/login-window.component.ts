@@ -11,14 +11,17 @@ export class LoginWindowComponent implements OnInit {
   constructor(private database: DatabaseService ) { }
 
   ngOnInit(): void {
-    $(".txtb input").on("focus",function(){
-      $(this).addClass("focus");
-    });
-    
-    $(".txtb input").on("blur",function(){
-      if($(this).val() == "")
-      $(this).removeClass("focus");
-    });
+
+  }
+
+  focusIn(inputElement: HTMLInputElement){
+    inputElement.classList.add('focus');
+  }
+
+  focusOut(inputElement: HTMLInputElement){
+    if (inputElement.value === ''){
+      inputElement.classList.remove('focus');
+    }
   }
 
   async checkLogin(){
