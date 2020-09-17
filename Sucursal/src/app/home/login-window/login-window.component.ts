@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/database.service';
 
 @Component({
   selector: 'app-login-window',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginWindowComponent implements OnInit {
 
-  constructor() { }
+  constructor(private database: DatabaseService ) { }
 
   ngOnInit(): void {
     $(".txtb input").on("focus",function(){
@@ -20,8 +21,9 @@ export class LoginWindowComponent implements OnInit {
     });
   }
 
-  checkLogin(){
-    console.log('checking login');
+  async checkLogin(){
+    console.log('Aqui va el checkeo del login, usando una funcion del servicio "database" ');
+    const loginAccepted = await this.database.example();
   }
 
 }
