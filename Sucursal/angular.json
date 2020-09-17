@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Sucursal"
+    }
+  },
+  "defaultProject": "Sucursal",
+  "cli": {
+    "analytics": "318a9ae2-9079-4914-875d-f7856db31eca"
+  }
 }
