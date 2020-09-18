@@ -1,6 +1,6 @@
-<div class="container">
+<div *ngFor="let sucursal of sucursales" class="container mb-3">
   <div class="name-holder">
-    {{sucursalName}}
+    {{sucursal.Name}}
   </div>
 
   <div>
@@ -8,7 +8,7 @@
   </div>
 
   <div class="enabled-container">
-    <input type="checkbox">
+    <input type="checkbox" checked="{{sucursal.Enabled}}">
     <p>Habilitada</p>
   </div>
 

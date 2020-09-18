@@ -9,8 +9,7 @@ import { DatabaseService } from '../database.service';
 })
 export class SucursalVisualizerComponent implements OnInit {
 
-  sucursalName: string;
-  sucursalMoney: number;
+  sucursalMoney: number = 4367.50;
 
   sucursales: Sucursal[];
 

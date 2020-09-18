@@ -1,7 +1,7 @@
 export interface Sucursal{
-  name: string;
-  phone: string;
-  email: string;
-  addresID: string;
-  enabled: boolean;
+  Name: string;
+  Phone: string;
+  Email: string;
+  AddresId: string;
+  Enabled: boolean;
 }
