@@ -1,10 +1,9 @@
-<span *ngIf="loginState">
-  <div class="alert alert-success" role="alert">
-    A simple success alert—check it out!
-  </div>
-</span>
-
 <form action="checkLogin()" class="login-form">
+  <span *ngIf="!loginState">
+    <div class="alert alert-danger" role="alert">
+      User or Password not correct! Try Again!
+    </div>
+  </span>
   <h1>Login</h1>
 
   <div class="txtb">
