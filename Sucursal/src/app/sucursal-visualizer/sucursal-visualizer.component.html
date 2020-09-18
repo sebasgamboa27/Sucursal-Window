@@ -1,18 +1,18 @@
-<div class="container" fxLayout="column" fxLayoutGap="40px" >
-  <div fxLayout="row" class="name-holder">
+<div class="container">
+  <div class="name-holder">
     {{sucursalName}}
   </div>
 
-  <div fxLayout="row">
+  <div>
     Saldo: ${{sucursalMoney}}
   </div>
 
-  <div fxLayoutAlign="start center" fxLayoutGap="10px">
+  <div class="enabled-container">
     <input type="checkbox">
     <p>Habilitada</p>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+  <div class="buttons-container">
     <app-button>Salvar</app-button>
     <app-button>Eliminar</app-button>
     <app-button>Transacciones</app-button>
