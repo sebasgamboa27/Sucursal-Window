@@ -9,9 +9,11 @@ router.get('/', (req, res) => {
         user: req.headers.user, 
         password: req.headers.password
     });
-    db.query('select * from Test', (error, resultSet) => {
-        if(!error){
-            res.send(resultSet);
+    db.query('EXEC login', (error, resultSet) => {
+        if(error){
+            res.send(false);
+        }else {
+            res.send(resultSet.recordset);
         }
     });
 });
