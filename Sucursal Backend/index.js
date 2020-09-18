@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 
 //Routes
 const login = require('./endpoints/login');
+const sucursal = require('./endpoints/sucursal');
 
 app.use('/login', login);
+app.use('/sucursal', sucursal);
 
 app.listen(3000);
