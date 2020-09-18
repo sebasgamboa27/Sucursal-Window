@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database.service';
 
@@ -9,8 +9,10 @@ import { DatabaseService } from 'src/app/database.service';
 })
 export class LoginWindowComponent implements OnInit {
 
-  @ViewChild('userInput') userInput: ElementRef;
-  @ViewChild('passwordInput') passwordInput: ElementRef;
+  @Input() username: string;
+  @Input() password: string;
+
+  loginState: boolean = false;
 
   constructor(private database: DatabaseService, private router: Router) { }
 
@@ -28,8 +30,20 @@ export class LoginWindowComponent implements OnInit {
     }
   }
 
-  checkLogin(){
+  async checkLogin(){
+
+    console.log(this.username,this.password);
     this.router.navigateByUrl('/sucursal');
+
+    //this.loginState = await this.database.makeLogin(this.username,this.password);
+    
+    if(this.loginState){
+      this.router.navigateByUrl('/sucursal');
+    }
+    else{
+      console.log('error al conectarse');
+    }
+
     // this.database.login(this.userInput.nativeElement.value, this.passwordInput.nativeElement.value, data => {
     // });
   }

@@ -1,13 +1,19 @@
+<span *ngIf="loginState">
+  <div class="alert alert-success" role="alert">
+    A simple success alert—check it out!
+  </div>
+</span>
+
 <form action="checkLogin()" class="login-form">
   <h1>Login</h1>
 
   <div class="txtb">
-    <input #userInput type="text" (focus)="focusIn(userInput)" (focusout)="focusOut(userInput)">
+    <input #userInput [(ngModel)]="username" name="username" type="text" (focus)="focusIn(userInput)" (focusout)="focusOut(userInput)">
     <span data-placeholder="Username"></span>
   </div>
 
   <div class="txtb">
-    <input #passwordInput type="password" (focus)="focusIn(passwordInput)" (focusout)="focusOut(passwordInput)">
+    <input #passwordInput type="password" [(ngModel)]="password" name="password" (focus)="focusIn(passwordInput)" (focusout)="focusOut(passwordInput)">
     <span data-placeholder="Password"></span>
   </div>
 

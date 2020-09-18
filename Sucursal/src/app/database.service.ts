@@ -6,9 +6,14 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class DatabaseService {
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  login(user: string, password: string, callback: (data: any) => void) {
+  constructor(private http: HttpClient) { }
+  
+
+  /*login(user: string, password: string, callback: (data: any) => void) {
     this.http.get('http://localhost:3000/login', {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -16,8 +21,10 @@ export class DatabaseService {
         password
       })
     }).subscribe(callback);
+  }*/
+
+  async makeLogin(user: string,password:string) {
+    return await this.http.post<any>('http://localhost:3000/makeLogin',{user:user,password:password}).toPromise();
   }
-
-
 
 }

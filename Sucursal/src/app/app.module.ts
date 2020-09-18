@@ -7,8 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginWindowComponent } from './home/login-window/login-window.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SucursalVisualizerComponent } from './sucursal-visualizer/sucursal-visualizer.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { ButtonComponent } from './button/button.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { ButtonComponent } from './button/button.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

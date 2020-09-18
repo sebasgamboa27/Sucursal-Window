@@ -21,10 +21,12 @@ app.listen(3000, function () {
 
 // Ejemplo de funcion para hacer los querys
 
-app.post('/queryExample', async function (req, res) {
+app.post('/makeLogin', async function (req, res) {
   await sql.connect(dbConnString);
+  const user = req.body.user;
+  const password = req.body.password;
   
-  const result = await sql.query(`Ejemplo de query`);                
+  const result = await sql.query(`Stored Procedure`);                
 
   res.send(result.recordset);
 });
