@@ -12,7 +12,7 @@ export class LoginWindowComponent implements OnInit {
   @Input() username: string;
   @Input() password: string;
 
-  loginState = false;
+  loginState = true;
 
   constructor(private database: DatabaseService, private router: Router) { }
 
@@ -33,10 +33,12 @@ export class LoginWindowComponent implements OnInit {
   checkLogin(){
     console.log(this.username, this.password);
     this.database.login(this.username, this.password, data => {
+      console.log(data);
       if (data){
         console.log(data);
         this.router.navigateByUrl('/sucursal');
       }else {
+        this.loginState = false;
         console.log('Cannot signin');
       }
     });

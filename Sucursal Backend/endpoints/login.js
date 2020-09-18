@@ -5,11 +5,13 @@ const dbDriver = require('../database/database');
 const db = new dbDriver.Request();
 
 router.get('/', (req, res) => {
+    const {user,password} = req.headers;
     console.log({
         user: req.headers.user, 
         password: req.headers.password
     });
-    db.query('EXEC login', (error, resultSet) => {
+    db.query(`EXEC login '${user}', '${password}'`, (error, resultSet) => {
+        console.log(error);
         if(error){
             res.send(false);
         }else {
