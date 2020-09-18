@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatabaseService } from 'src/app/database.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginWindowComponent implements OnInit {
   @ViewChild('userInput') userInput: ElementRef;
   @ViewChild('passwordInput') passwordInput: ElementRef;
 
-  constructor(private database: DatabaseService) { }
+  constructor(private database: DatabaseService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -28,7 +29,9 @@ export class LoginWindowComponent implements OnInit {
   }
 
   checkLogin(){
-    this.database.login(this.userInput.nativeElement.value, this.passwordInput.nativeElement.value);
+    this.router.navigateByUrl('/sucursal');
+    // this.database.login(this.userInput.nativeElement.value, this.passwordInput.nativeElement.value, data => {
+    // });
   }
 
 }

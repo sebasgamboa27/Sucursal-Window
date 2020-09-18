@@ -1,0 +1,13 @@
+.container{
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.name-holder{
+  font-size: 30px;
+}
+
+app-button{
+  min-width: 150px;
+}
