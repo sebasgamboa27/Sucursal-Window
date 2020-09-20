@@ -34,6 +34,18 @@ export class SucursalVisualizerComponent implements OnInit {
     });
 }
 
+deleteSucursal(){
+  this.database.deleteSucursal(this.sucursal.Email,data => {
+    if (data != null){
+      console.log('Sucursal Borrada');
+    }
+    else{
+      console.log('Error al borrar sucursal');
+    }
+  });
+  
+}
+
 }
 
 

@@ -34,4 +34,15 @@ export class DatabaseService {
       })
     }).subscribe(callback);
   }
+
+  deleteSucursal( sucursalEmail: string,callback: (data: any) => void) {
+    this.http.get<any>('http://localhost:3000/deleteSucursal', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        email: sucursalEmail,
+      })
+    }).subscribe(callback);
+  }
+
+
 }

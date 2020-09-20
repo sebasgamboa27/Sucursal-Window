@@ -17,9 +17,12 @@ app.use(bodyParser.json());
 const login = require('./endpoints/login');
 const sucursal = require('./endpoints/sucursal');
 const user = require('./endpoints/user');
+const deleteSucursal = require('./endpoints/deleteSucursal');
+
 
 app.use('/login', login);
 app.use('/sucursal', sucursal);
 app.use('/user', user);
+app.use('/deleteSucursal',deleteSucursal);
 
 app.listen(3000);

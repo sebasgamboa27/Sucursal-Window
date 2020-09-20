@@ -1,11 +1,11 @@
 const driver = require('mssql');
 
 const config = {
-    user: 'sa',
-    password: 'password',
+    user: 'SA',
+    password: '<hola1234>',
     server: 'localhost',
-    database: 'Sucursales',
-    port: 1434
+    database: 'PruebasBD2',
+    port: 1433
 };
 
 console.log('Atempting connection to database...')
