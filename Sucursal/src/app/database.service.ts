@@ -46,7 +46,7 @@ export class DatabaseService {
 
 
   updateSucursal(sucursalEmail: string, state: string, callback: (data: any) => void) {
-    this.http.put<any>('http://localhost:3000/sucursal', {
+    this.http.put<any>('http://localhost:3000/sucursal', null, {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         email: sucursalEmail,
