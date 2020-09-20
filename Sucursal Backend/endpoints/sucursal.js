@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-    const {email,state} = req.body;
+    const {email,state} = req.headers;
     console.log(email,state);
     db.query(`UPDATE Rep_Sucursal SET Enabled = ${state} WHERE '${email}' = Email`, (error, resultSet) => {
         if(error != null){
