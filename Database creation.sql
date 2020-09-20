@@ -2,7 +2,6 @@ create database Sucursales
 
 use Sucursales
 
-
 -- --------------------------------------------La parte de rodri
 SET ANSI_NULLS ON
 GO
@@ -162,8 +161,8 @@ GO
 CREATE TABLE [User](
 	[UserId] [bigint] NOT NULL IDENTITY(1,1),
 	[name] [nvarchar](130) NOT NULL,
-	[email] [nvarchar](120) NOT NULL,
-	[password] [varbinary] NOT NULL,
+	[email] [nvarchar](120) UNIQUE NOT NULL,
+	[password] [varbinary](100) NOT NULL,
 	--Sucursal
 	[Enabled] [bit] NOT NULL,
  CONSTRAINT [PK_UserId] PRIMARY KEY CLUSTERED 
