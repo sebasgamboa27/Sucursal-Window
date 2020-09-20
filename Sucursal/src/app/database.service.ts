@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Sucursal } from 'src/interfaces/sucursal';
+import { Sucursal } from 'src/models/sucursal';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
+
+  userEmail: string;
 
   constructor(private http: HttpClient) { }
 
@@ -16,10 +18,20 @@ export class DatabaseService {
         user,
         password
       })
-    }).subscribe(callback);
+    }).subscribe( data => {
+      if (data){
+        this.userEmail = user;
+      }
+      callback(data);
+    });
   }
 
-  getSucursal( callback: (data: Sucursal[]) => void) {
-    this.http.get('http://localhost:3000/sucursal', {}).subscribe(callback);
+  getSucursal( callback: (data: Sucursal) => void) {
+    this.http.get<Sucursal>('http://localhost:3000/sucursal', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        email: this.userEmail,
+      })
+    }).subscribe(callback);
   }
 }

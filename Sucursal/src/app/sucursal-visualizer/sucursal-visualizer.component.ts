@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sucursal } from 'src/interfaces/sucursal';
+import { Sucursal } from 'src/models/sucursal';
 import { DatabaseService } from '../database.service';
 
 @Component({
@@ -9,23 +9,27 @@ import { DatabaseService } from '../database.service';
 })
 export class SucursalVisualizerComponent implements OnInit {
 
-  sucursalMoney: number = 4367.50;
-
-  sucursales: Sucursal[];
+  sucursal: Sucursal;
 
   constructor(private database: DatabaseService) {
-
+    this.sucursal = {
+      Name: 'Loading...',
+      Email: 'Loading...',
+      Phone: 'Loading...',
+      Enabled: false,
+      capital: 0,
+      AddresId: null,
+    };
   }
 
   ngOnInit(): void {
     this.database.getSucursal( data => {
-      console.log(data);
-      if(data != null){
-        this.sucursales = data;
-        console.log(this.sucursales);
+      if (data){
+        this.sucursal = data;
+        console.log(this.sucursal);
       }
       else{
-        console.log('error cargando sucursales');
+        this.sucursal.Name = 'Error al cargar la sucursal';
       }
     });
 }

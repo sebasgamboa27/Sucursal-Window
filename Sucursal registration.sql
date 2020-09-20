@@ -16,7 +16,8 @@ CREATE PROCEDURE [dbo].[repsp_registrarSucursal]
 	@Address2 VARCHAR(120) = NULL,
 	@lat DECIMAL(20, 16),
 	@long DECIMAL(20, 16),
-	@zipcode VARCHAR(10)
+	@zipcode VARCHAR(10), 
+	@userEmail NVARCHAR(120)
 AS
 BEGIN
 	DECLARE 
@@ -25,12 +26,15 @@ BEGIN
 	@cityId INT,
 	@spatialLocation GEOGRAPHY,
 	@idSucursal INT,
+	@userId BIGINT,
 	@INVALID_ZIPCODE INT,
 	@INVALID_COUNTRY INT,
+	@INVALID_EMAIL INT,
 	@UNABLE_TO_ADD_STORE INT;
 	SET @UNABLE_TO_ADD_STORE = 50002;
 	SET @INVALID_COUNTRY = 50001;
 	SET @INVALID_ZIPCODE = 50000;
+	SET @INVALID_EMAIL = 5005;
 	SET NOCOUNT ON;
 	/*Check if country does not exists*/
 	IF NOT EXISTS (SELECT * FROM Rep_Countries WHERE Rep_Countries.Name = @Country) BEGIN
@@ -63,12 +67,17 @@ BEGIN
 		THROW @INVALID_ZIPCODE, 'Zipcode must not be null', 0
 	END
 
+	SELECT @userId = usr.UserId FROM [User] AS usr WHERE @userEmail = usr.email;
+	IF (@userId IS NULL) BEGIN
+		THROW @INVALID_EMAIL, N'INVALID EMAIL', 0;
+	END
+
 	BEGIN TRY
 		BEGIN TRANSACTION
 			SET TRANSACTION ISOLATION LEVEL READ COMMITTED
 			INSERT INTO Rep_Addresses VALUES(@Address1, @Address2, @zipcode, @spatialLocation, @cityId, GETDATE(), 1);
 			SET @idSucursal = SCOPE_IDENTITY();
-			INSERT INTO Rep_Sucursal VALUES(@name, @phoneNumber, @email, @idSucursal, 1);
+			INSERT INTO Rep_Sucursal VALUES(@name, @phoneNumber, @email, @idSucursal, 1, @userId, 0.0);
 			COMMIT;
 	END TRY
 
@@ -80,8 +89,8 @@ BEGIN
 END
 
 EXEC repsp_registrarSucursal
-	@name = 'Test',
-	@email = 'test@test.com',
+	@name = 'Kiwi corp',
+	@email = 'help@kiwicorp.com',
 	@phoneNumber = '+50600000000',
 	@City = 'Cartago',
 	@State = 'Cartago',
@@ -90,6 +99,7 @@ EXEC repsp_registrarSucursal
 	@Address2 = '100 mts oeste hospital y',
 	@lat = 9.32132032,
 	@long = -8.165161,
-	@zipcode = '31225';
+	@zipcode = '31225', 
+	@userEmail = 'tribethr@gmail.com';
 
 

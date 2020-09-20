@@ -71,9 +71,12 @@ CREATE TABLE [dbo].[Rep_Sucursal](
 	[Phone] [varchar](12) NOT NULL,
 	[Email] [varchar](120) NOT NULL,
 	[AddressId] [bigint] NOT NULL,
-	[Enabled] [bit] NOT NULL
+	[Enabled] [bit] NOT NULL,
+	[UserId] [bigint] NOT NULL,
+	[capital] [FLOAT] NOT NULL
 ) ON [PRIMARY]
 GO
+
 ALTER TABLE [dbo].[Rep_Addresses] ADD  CONSTRAINT [DF_Rep_Addresses_PostTime]  DEFAULT (getdate()) FOR [PostTime]
 GO
 ALTER TABLE [dbo].[Rep_Addresses] ADD  CONSTRAINT [DF_Rep_Addresses_Enabled]  DEFAULT ((1)) FOR [Enabled]
@@ -170,6 +173,12 @@ CREATE TABLE [User](
 	[UserId] ASC
 )
 )
+
+ALTER TABLE [dbo].[Rep_Sucursal]  WITH CHECK ADD  CONSTRAINT [FK_Rep_Sucursal_User] FOREIGN KEY([UserId])
+REFERENCES [dbo].[User] ([UserId])
+GO
+ALTER TABLE [dbo].[Rep_Sucursal] CHECK CONSTRAINT [FK_Rep_Sucursal_User]
+GO
 
 -- Tabla usuarios por rol
 

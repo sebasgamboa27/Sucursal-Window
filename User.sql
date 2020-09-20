@@ -24,3 +24,16 @@ CREATE PROCEDURE createUser(@name NVARCHAR(130), @email NVARCHAR(120), @password
 	BEGIN
 	INSERT INTO [USER] VALUES(@name, @email, @ENCRYPTED_PASS, 1);
 END
+
+CREATE PROCEDURE getSucursalByUser(@userEmail NVARCHAR(120)) AS 
+	DECLARE
+	@INVALID_EMAIL INT,
+	@userId BIGINT;
+	SET @INVALID_EMAIL = 5005;
+	BEGIN
+	SELECT @userId = usr.UserId FROM [User] AS usr WHERE @userEmail = usr.email;
+	IF (@userId IS NULL) BEGIN
+		THROW @INVALID_EMAIL, N'INVALID EMAIL', 0;
+	END
+	SELECT Name, Phone, Email, capital, Enabled FROM Rep_Sucursal AS sucursal WHERE sucursal.UserId = @userId;
+END

@@ -1,10 +1,16 @@
-<div *ngFor="let sucursal of sucursales" class="container mb-3">
+<div class="container mb-3">
   <div class="name-holder">
     {{sucursal.Name}}
   </div>
 
   <div>
-    Saldo: ${{sucursalMoney}}
+    Saldo: ${{sucursal.capital}}
+  </div>
+  <div>
+    Email: {{sucursal.Email}}
+  </div>
+  <div>
+    Telefono: {{sucursal.Phone}}
   </div>
 
   <div class="enabled-container">

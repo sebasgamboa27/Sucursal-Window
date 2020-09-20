@@ -5,12 +5,13 @@ const dbDriver = require('../database/database');
 const db = new dbDriver.Request();
 
 router.get('/', (req, res) => {
-    db.query(`SELECT * FROM Rep_Sucursal`, (error, resultSet) => {
+    const {email} = req.headers;
+    db.query(`EXEC getSucursalByUser '${email}'`, (error, resultSet) => {
         console.log(error);
         if(error){
             res.send(null);
         }else {
-            res.send(resultSet.recordset);
+            res.send(resultSet.recordset[0]);
         }
     });
 });
