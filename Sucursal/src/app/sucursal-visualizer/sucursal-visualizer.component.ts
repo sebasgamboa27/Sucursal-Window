@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Sucursal } from 'src/models/sucursal';
 import { DatabaseService } from '../database.service';
 
@@ -11,7 +12,7 @@ export class SucursalVisualizerComponent implements OnInit {
 
   sucursal: Sucursal;
 
-  constructor(private database: DatabaseService) {
+  constructor(private database: DatabaseService, private router: Router) {
     this.sucursal = {
       Name: 'Loading...',
       Email: 'Loading...',
@@ -44,6 +45,10 @@ deleteSucursal(){
     }
   });
   
+}
+
+goBack(){
+  this.router.navigateByUrl('/');
 }
 
 }
