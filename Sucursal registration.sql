@@ -93,21 +93,3 @@ EXEC repsp_registrarSucursal
 	@zipcode = '31225';
 
 
-
-	CREATE PROCEDURE login(
-   @email nvarchar(130),
-   @password nvarchar(120)
-)
-AS
-	DECLARE
-	@USER_NOT_FOUND INT;
-	SET @USER_NOT_FOUND = 50000;
-
-    Begin
-	IF NOT EXISTS (SELECT * FROM [dbo].[User] as u WHERE u.email = @email and u.password = @password) BEGIN
-		THROW @USER_NOT_FOUND, N'User does not exist', 0
-	END
-    SELECT PU.PermissionId,PU.UserId,PU.PostTime,PU.Deleted,PU.Enabled
-        FROM Permission_x_User AS PU inner join [User] U ON PU.UserId = U.UserId 
-        WHERE @email = U.email
-End
