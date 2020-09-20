@@ -14,12 +14,12 @@
   </div>
 
   <div class="enabled-container">
-    <input type="checkbox" [checked]="sucursal.Enabled">
+    <input [(ngModel)]="habilitada" name="habilitada" type="checkbox" [checked]="sucursal.Enabled">
     <p>Habilitada</p>
   </div>
 
   <div class="buttons-container">
-    <app-button>Salvar</app-button>
+    <app-button (click)="updateSucursal()">Salvar</app-button>
     <app-button (click)="deleteSucursal()">Eliminar</app-button>
     <app-button>Transacciones</app-button>
     <app-button (click)="goBack()">Atras</app-button>

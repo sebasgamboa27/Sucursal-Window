@@ -45,4 +45,17 @@ export class DatabaseService {
   }
 
 
+  updateSucursal(sucursalEmail: string,state: string,callback: (data: any) => void) {
+    this.http.get<any>('http://localhost:3000/updateSucursal', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        email: sucursalEmail,
+        state: state
+      })
+    }).subscribe(callback);
+  }
+
 }
+
+
+

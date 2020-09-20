@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sucursal } from 'src/models/sucursal';
 import { DatabaseService } from '../database.service';
@@ -11,6 +11,7 @@ import { DatabaseService } from '../database.service';
 export class SucursalVisualizerComponent implements OnInit {
 
   sucursal: Sucursal;
+  @Input() habilitada: boolean;
 
   constructor(private database: DatabaseService, private router: Router) {
     this.sucursal = {
@@ -42,6 +43,28 @@ deleteSucursal(){
     }
     else{
       console.log('Error al borrar sucursal');
+    }
+  });
+  
+}
+
+updateSucursal(){
+  let state;
+  if(this.habilitada){
+    state = '1';
+  }
+  else{
+    state = '0';
+  }
+
+  console.log(this.habilitada,state);
+
+  this.database.updateSucursal(this.sucursal.Email,state,data => {
+    if (data != null){
+      console.log('Sucursal actualizada');
+    }
+    else{
+      console.log('Error al actualizar sucursal');
     }
   });
   

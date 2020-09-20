@@ -18,11 +18,15 @@ const login = require('./endpoints/login');
 const sucursal = require('./endpoints/sucursal');
 const user = require('./endpoints/user');
 const deleteSucursal = require('./endpoints/deleteSucursal');
+const updateSucursal = require('./endpoints/updateSucursal');
 
 
 app.use('/login', login);
 app.use('/sucursal', sucursal);
 app.use('/user', user);
 app.use('/deleteSucursal',deleteSucursal);
+app.use('/updateSucursal',updateSucursal);
+
+
 
 app.listen(3000);
