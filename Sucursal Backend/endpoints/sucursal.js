@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/', (req, res) => {
-    const {email,state} = req.body;
+    const {email,state} = req.headers;
     console.log(email,state);
     db.query(`EXEC state_sucursal '${email}', ${state}`, (error, resultSet) => {
         if(error != null){

@@ -1,22 +1,22 @@
 <div class="container mb-3">
-  <div class="name-holder">
+  <h1 class="name-holder">
     {{sucursal.Name}}
-  </div>
+  </h1>
 
-  <div>
-    Saldo: ${{sucursal.capital}}
-  </div>
-  <div>
-    Email: {{sucursal.Email}}
-  </div>
-  <div>
-    Telefono: {{sucursal.Phone}}
-  </div>
+  <h4>
+    <span class="badge badge-success"><i class="fas fa-money-bill-wave"></i> Saldo:</span> ${{sucursal.capital}}
+  </h4>
+  <h4>
+    <span class="badge badge-dark"><i class="fas fa-inbox"></i> Email:</span> {{sucursal.Email}}
+  </h4>
+  <h4>
+    <span class="badge badge-info"><i class="fas fa-phone"></i> Telefono:</span> {{sucursal.Phone}}
+  </h4>
 
-  <div class="enabled-container">
+  <h4 class="enabled-container">
     <input [(ngModel)]="habilitada" name="habilitada" type="checkbox" [checked]="sucursal.Enabled">
     <p>Habilitada</p>
-  </div>
+  </h4>
 
   <div class="buttons-container">
     <app-button (click)="updateSucursal()">Salvar</app-button>
