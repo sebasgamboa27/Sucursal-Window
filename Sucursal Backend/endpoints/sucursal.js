@@ -21,4 +21,27 @@ router.post('/', (req, res) => {
     res.send(true);
 });
 
+router.put('/', (req, res) => {
+    const {email,state} = req.headers;
+    console.log(email,state);
+    db.query(`UPDATE Rep_Sucursal SET Enabled = ${state} WHERE '${email}' = Email`, (error, resultSet) => {
+        if(error != null){
+            res.send(null);
+        }else {
+            res.send('actualizado exitosamente');
+        }
+    });
+});
+
+router.delete('/', (req, res) => {
+    const {email} = req.headers;
+    db.query(`DELETE FROM Rep_Sucursal WHERE '${email}' = Email`, (error, resultSet) => {
+        if(error != null){
+            res.send(null);
+        }else {
+            res.send('borrado exitosamente');
+        }
+    });
+});
+
 module.exports = router;
