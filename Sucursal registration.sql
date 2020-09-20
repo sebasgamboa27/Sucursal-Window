@@ -103,3 +103,8 @@ EXEC repsp_registrarSucursal
 	@userEmail = 'tribethr@gmail.com';
 
 
+CREATE PROCEDURE state_sucursal(@email nvarchar(130), @state bit) AS BEGIN 
+	UPDATE Rep_Sucursal SET Enabled = @state WHERE Rep_Sucursal.Email = @email
+END
+
+
