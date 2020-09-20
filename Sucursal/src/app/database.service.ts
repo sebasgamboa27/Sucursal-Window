@@ -35,16 +35,6 @@ export class DatabaseService {
     }).subscribe(callback);
   }
 
-  deleteSucursal( sucursalEmail: string, callback: (data: any) => void) {
-    this.http.delete<any>('http://localhost:3000/sucursal', {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        email: sucursalEmail,
-      })
-    }).subscribe(callback);
-  }
-
-
   updateSucursal(sucursalEmail: string, state: string, callback: (data: any) => void) {
     this.http.put<any>('http://localhost:3000/sucursal', null, {
       headers: new HttpHeaders({

@@ -37,7 +37,7 @@ export class SucursalVisualizerComponent implements OnInit {
 }
 
 deleteSucursal(){
-  this.database.deleteSucursal(this.sucursal.Email,data => {
+  this.database.updateSucursal(this.sucursal.Email, '0', data => {
     if (data != null){
       console.log('Sucursal Borrada');
     }
@@ -45,21 +45,21 @@ deleteSucursal(){
       console.log('Error al borrar sucursal');
     }
   });
-  
+
 }
 
 updateSucursal(){
   let state;
-  if(this.habilitada){
+  if (this.habilitada){
     state = '1';
   }
   else{
     state = '0';
   }
 
-  console.log(this.habilitada,state);
+  console.log(this.habilitada, state);
 
-  this.database.updateSucursal(this.sucursal.Email,state,data => {
+  this.database.updateSucursal(this.sucursal.Email, state, data => {
     if (data != null){
       console.log('Sucursal actualizada');
     }
@@ -67,7 +67,7 @@ updateSucursal(){
       console.log('Error al actualizar sucursal');
     }
   });
-  
+
 }
 
 goBack(){
