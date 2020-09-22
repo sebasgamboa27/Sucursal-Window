@@ -37,3 +37,9 @@ CREATE PROCEDURE getSucursalByUser(@userEmail NVARCHAR(120)) AS
 	END
 	SELECT Name, Phone, Email, capital, Enabled FROM Rep_Sucursal AS sucursal WHERE sucursal.UserId = @userId;
 END
+
+
+	/*Get user info and permissions*/
+	
+SELECT u.name,p.PermissionId FROM Permission_x_User as p, [User] as u WHERE p.UserId = u.UserId
+AND u.email = '${email}'

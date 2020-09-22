@@ -45,6 +45,16 @@ export class DatabaseService {
     }).subscribe(callback);
   }
 
+  userInfo(callback: (data: any) => void) {
+    console.log('este es el email', this.userEmail);
+    this.http.get('http://localhost:3000/userInfo', {headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+        email: this.userEmail,
+      })
+    }).subscribe(callback);
+  }
+
+
 }
 
 

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sucursal } from 'src/models/sucursal';
+import { User } from 'src/models/user';
 import { DatabaseService } from '../database.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class SucursalVisualizerComponent implements OnInit {
 
   sucursal: Sucursal;
   @Input() habilitada: boolean;
+  user: User;
 
   constructor(private database: DatabaseService, private router: Router) {
     this.sucursal = {
@@ -28,10 +30,20 @@ export class SucursalVisualizerComponent implements OnInit {
     this.database.getSucursal( data => {
       if (data){
         this.sucursal = data;
-        console.log(this.sucursal);
       }
       else{
         this.sucursal.Name = 'Error al cargar la sucursal';
+      }
+    });
+
+    this.database.userInfo(data => {
+      if (data){
+        debugger;
+        this.user = data[0];
+        console.log(this.user);
+      }
+      else{
+        console.log('Error al cargar usuario');
       }
     });
 }

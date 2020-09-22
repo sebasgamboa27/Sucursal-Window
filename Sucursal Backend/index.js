@@ -17,11 +17,13 @@ app.use(bodyParser.json());
 const login = require('./endpoints/login');
 const sucursal = require('./endpoints/sucursal');
 const user = require('./endpoints/user');
+const userInfo = require('./endpoints/userInfo');
 
 
 app.use('/login', login);
 app.use('/sucursal', sucursal);
 app.use('/user', user);
+app.use('/userInfo',userInfo);
 
 
 
