@@ -6,7 +6,6 @@ const db = new dbDriver.Request();
 
 router.get('/', (req, res) => {
     const {email} = req.headers;
-    console.log('este es el email: ',email);
     db.query(`SELECT u.name,p.PermissionId FROM Permission_x_User as p, [User] as u WHERE p.UserId = u.UserId
     AND u.email = '${email}'`, (error, resultSet) => {
         if(error){
@@ -18,7 +17,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  console.log(req.body);
   res.send(true);
 });
 

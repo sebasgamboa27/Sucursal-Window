@@ -82,6 +82,8 @@ updateSucursal(){
       if(counter === 0) this.resetAlert()
     }, 5000)
 
+    this.habilitada = !this.habilitada;
+
   }
 
   else{

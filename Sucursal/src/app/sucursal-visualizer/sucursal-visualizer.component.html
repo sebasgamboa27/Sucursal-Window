@@ -28,15 +28,15 @@
     <span class="badge badge-info"><i class="fas fa-phone"></i> Telefono:</span> {{sucursal.Phone}}
   </h4>
 
-  <h4 class="enabled-container">
-    <input [(ngModel)]="habilitada" name="habilitada" type="checkbox" [checked]="sucursal.Enabled">
-    <p>Habilitada</p>
+  <h4 class="custom-control custom-switch">
+    <input [(ngModel)]="habilitada" name="habilitada" type="checkbox" class="custom-control-input" id="customSwitch1" [checked]="sucursal.Enabled">
+    <label class="custom-control-label" for="customSwitch1">Habilitada</label>
   </h4>
 
   <div class="buttons-container">
-    <app-button (click)="updateSucursal()">Salvar</app-button>
-    <app-button (click)="deleteSucursal()">Eliminar</app-button>
-    <app-button>Transacciones</app-button>
-    <app-button (click)="goBack()">Atras</app-button>
+    <app-button (click)="updateSucursal()">Salvar <i class="fas fa-save"></i></app-button>
+    <app-button (click)="deleteSucursal()">Eliminar <i class="fas fa-trash-alt"></i></app-button>
+    <app-button>Transacciones <i class="fas fa-receipt"></i></app-button>
+    <app-button (click)="goBack()">Atras <i class="fas fa-door-open"></i></app-button>
   </div>
 </div>
