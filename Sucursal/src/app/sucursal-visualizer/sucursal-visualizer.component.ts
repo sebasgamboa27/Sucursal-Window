@@ -14,6 +14,7 @@ export class SucursalVisualizerComponent implements OnInit {
   sucursal: Sucursal;
   @Input() habilitada: boolean;
   user: User;
+  permissionState: number = 0;
 
   constructor(private database: DatabaseService, private router: Router) {
     this.sucursal = {
@@ -71,19 +72,45 @@ updateSucursal(){
 
   console.log(this.habilitada, state);
 
-  this.database.updateSucursal(this.sucursal.Email, state, data => {
-    if (data != null){
-      console.log('Sucursal actualizada');
-    }
-    else{
-      console.log('Error al actualizar sucursal');
-    }
-  });
+  if(this.user.PermissionId == 1){
+    this.permissionState = 1;
+
+    let counter = 2 
+    let intervalId = setInterval(() => {
+      counter -= 1;
+      console.log(counter)
+      if(counter === 0) this.resetAlert()
+    }, 5000)
+
+  }
+
+  else{
+    this.database.updateSucursal(this.sucursal.Email, state, data => {
+      if (data != null){
+        console.log('Sucursal actualizada');
+      }
+      else{
+        console.log('Error al actualizar sucursal');
+      }
+    });
+    this.permissionState = 2;
+    let counter = 2 
+    let intervalId = setInterval(() => {
+      counter -= 1;
+      console.log(counter)
+      if(counter === 0) this.resetAlert()
+    }, 5000)
+    
+  }
 
 }
 
 goBack(){
   this.router.navigateByUrl('/');
+}
+
+resetAlert(){
+  this.permissionState = 0;
 }
 
 }
