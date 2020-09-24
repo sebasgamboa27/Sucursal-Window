@@ -15,6 +15,12 @@ export class SucursalVisualizerComponent implements OnInit {
   @Input() habilitada: boolean;
   user: User;
   permissionState: number = 0;
+  userPermissions: any[];
+  saldo: boolean = false;
+  update: boolean = false;
+  transacciones: boolean = false;
+  delete: boolean = false;
+  deletedAlert: boolean = false;
 
   constructor(private database: DatabaseService, private router: Router) {
     this.sucursal = {
@@ -47,9 +53,47 @@ export class SucursalVisualizerComponent implements OnInit {
         console.log('Error al cargar usuario');
       }
     });
+
+    this.database.permissions(data => {
+      if (data){
+        debugger;
+        this.userPermissions = data;
+        for (let i = 0; i < this.userPermissions.length; i++) {
+          if(this.userPermissions[i].Code == 1){
+            this.update = true;
+          }
+          else if(this.userPermissions[i].Code == 2){
+            this.saldo = true;
+          }
+          else if(this.userPermissions[i].Code == 3){
+            this.transacciones = true;
+          }
+          else if(this.userPermissions[i].Code == 4){
+            this.delete = true;
+          }
+          
+        }
+      }
+      else{
+        console.log('Error al cargar permisos');
+      }
+    });
+
+
+
 }
 
 deleteSucursal(){
+  if(!this.delete){
+    this.deletedAlert = true;
+    let counter = 2 
+    let intervalId = setInterval(() => {
+      counter -= 1;
+      console.log(counter)
+      if(counter === 0) this.deletedAlert=false
+    }, 5000)
+    return;
+  }
   this.database.updateSucursal(this.sucursal.Email, '0', data => {
     if (data != null){
       console.log('Sucursal Borrada');
@@ -62,6 +106,19 @@ deleteSucursal(){
 }
 
 updateSucursal(){
+
+  if(!this.update){
+    this.habilitada = !this.habilitada;
+    this.permissionState = 2;
+    let counter = 2 
+    let intervalId = setInterval(() => {
+      counter -= 1;
+      console.log(counter)
+      if(counter === 0) this.resetAlert()
+    }, 5000)
+    return;
+  }
+
   let state;
   if (this.habilitada){
     state = '1';
@@ -72,38 +129,25 @@ updateSucursal(){
 
   console.log(this.habilitada, state);
 
-  if(this.user.PermissionId == 1){
-    this.permissionState = 1;
+  this.permissionState = 1;
 
-    let counter = 2 
-    let intervalId = setInterval(() => {
-      counter -= 1;
-      console.log(counter)
-      if(counter === 0) this.resetAlert()
-    }, 5000)
+  let counter = 2 
+  let intervalId = setInterval(() => {
+    counter -= 1;
+    console.log(counter)
+    if(counter === 0) this.resetAlert()
+  }, 5000)
 
-    this.habilitada = !this.habilitada;
-
-  }
-
-  else{
-    this.database.updateSucursal(this.sucursal.Email, state, data => {
-      if (data != null){
-        console.log('Sucursal actualizada');
-      }
-      else{
-        console.log('Error al actualizar sucursal');
-      }
-    });
-    this.permissionState = 2;
-    let counter = 2 
-    let intervalId = setInterval(() => {
-      counter -= 1;
-      console.log(counter)
-      if(counter === 0) this.resetAlert()
-    }, 5000)
-    
-  }
+  
+  this.database.updateSucursal(this.sucursal.Email, state, data => {
+    if (data != null){
+      console.log('Sucursal actualizada');
+    }
+    else{
+      console.log('Error al actualizar sucursal');
+    }
+  });
+  
 
 }
 

@@ -1,15 +1,20 @@
 <span *ngIf="permissionState == 1">
-  <div class="alert alert-danger" role="alert">
-    Usuario no tiene permiso para realizar esta accion, lo sentimos.
-  </div>
-</span>
-
-<span *ngIf="permissionState == 2">
   <div class="alert alert-success" role="alert">
     Sucursal actualizada de manera correcta!
   </div>
 </span>
 
+<span *ngIf="permissionState == 2">
+  <div class="alert alert-danger" role="alert">
+    Usuario no tiene permiso para realizar accion
+  </div>
+</span>
+
+<span *ngIf="deletedAlert">
+  <div class="alert alert-danger" role="alert" id="deleted">
+    Usuario no tiene permiso para realizar accion
+  </div>
+</span>
 
 <h1>Bienvenido {{user?.name}}!</h1>
 
@@ -18,9 +23,11 @@
     {{sucursal.Name}}
   </h1>
 
-  <h4>
-    <span class="badge badge-success"><i class="fas fa-money-bill-wave"></i> Saldo:</span> ${{sucursal.capital}}
-  </h4>
+  <span *ngIf="saldo">
+    <h4>
+      <span class="badge badge-success"><i class="fas fa-money-bill-wave"></i> Saldo:</span> ${{sucursal.capital}}
+    </h4>
+  </span>
   <h4>
     <span class="badge badge-dark"><i class="fas fa-inbox"></i> Email:</span> {{sucursal.Email}}
   </h4>

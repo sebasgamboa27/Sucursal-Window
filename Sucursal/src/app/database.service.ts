@@ -54,6 +54,17 @@ export class DatabaseService {
     }).subscribe(callback);
   }
 
+  permissions(callback: (data: any) => void) {
+    this.http.get<any>('http://localhost:3000/permissions', {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        email: this.userEmail
+      })
+    }).subscribe(callback);
+  }
+
+  
+
 
 }
 
